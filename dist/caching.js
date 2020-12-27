@@ -7,20 +7,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { createClient } from 'otter.ai-api';
 // @ts-ignore
 import * as alfy from 'alfy';
-function validateEnv() {
-    var _a, _b;
-    if (!((_a = process.env.email) === null || _a === void 0 ? void 0 : _a.trim()) || !((_b = process.env.password) === null || _b === void 0 ? void 0 : _b.trim())) {
-        alfy.error("Please specify your email and password in workflow variables");
-        process.exit();
+export const get = (key, compute, maxAge = undefined) => __awaiter(void 0, void 0, void 0, function* () {
+    const value = alfy.cache.get(key);
+    if (!value) {
+        const newValue = yield compute();
+        alfy.cache.set(key, newValue, { maxAge });
+        return newValue;
     }
-}
-export const otterClient = () => __awaiter(void 0, void 0, void 0, function* () {
-    validateEnv();
-    return yield createClient({
-        email: process.env.email,
-        password: process.env.password,
-    });
+    return value;
 });

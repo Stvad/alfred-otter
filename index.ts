@@ -1,33 +1,45 @@
-import {otterClient} from "./otter"
+import {otterClient} from './otter'
+import * as caching from './caching'
 
-const alfy = require('alfy')
+// @ts-ignore
+import * as alfy from 'alfy'
 
-interface Speech {
-    title: string | null,
-    summary: string,
-    created_at: number,
-    speech_id: string,
-}
+// todo way to invalidate cache?
+const cacheTimeMs = parseInt(process.env.searchCacheTimeMs || "180000")
 
-(async () => {
-    // todo search, export all in range
-    // todo open otter web view variation
-    const allItems = 'allItems'
-    let speechItems = alfy.cache.get(allItems)
-
-    if (!speechItems) {
+const allSpeeches = async () =>
+    await caching.get('allItems', async () => {
         const otterApi = await otterClient()
         let speeches = await otterApi.getSpeeches()
 
-        speechItems = speeches.map((it: Speech) => ({
+        return speeches.map(it => ({
             title: it.title || it.summary,
-            subtitle: new Date(it.created_at * 1000).toLocaleString(),
+            subtitle: renderTime(it.start_time),
             arg: it.speech_id,
         }))
+    }, cacheTimeMs)
 
-        // todo way to invalidate cache or maybe just make time configurable?
-        alfy.cache.set(allItems, speechItems, {maxAge: 120000})
+const matchingSpeeches = async (query: string) =>
+    await caching.get(query, async () => {
+        const otterApi = await otterClient()
+        let speeches = await otterApi.speechSearch(query)
+
+        return speeches.map(it => ({
+            title: it.matched_transcripts.map(ts => ts.matched_transcript).join(" "),
+            subtitle: renderTime(it.start_time),
+            arg: it.speech_id,
+        }))
+    }, cacheTimeMs)
+
+const renderTime = (timestamp: number) => new Date(timestamp * 1000).toLocaleString();
+
+(async () => {
+    // todo export all in range
+    // todo open otter web view variation
+    const query = alfy.input?.trim()
+    if (query) {
+        alfy.output(await matchingSpeeches(query))
+    } else {
+        alfy.output(await allSpeeches())
     }
-
-    alfy.output(speechItems)
 })()

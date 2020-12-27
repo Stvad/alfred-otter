@@ -1,11 +1,16 @@
 import {otterClient} from "./otter"
+import * as caching from './caching'
 
-const alfy = require('alfy');
+// @ts-ignore
+import * as alfy from 'alfy'
 
 (async () => {
     // todo cache. this one can be cached pretty much forever
-    const otterApi = await otterClient()
-    let speech = await otterApi.getSpeech(alfy.input)
+
+    const speech = await caching.get(alfy.input, async () => {
+        const otterApi = await otterClient()
+        return await otterApi.getSpeech(alfy.input)
+    })
 
     const resultParts = speech.transcripts.map(it => it.transcript)
         .concat(

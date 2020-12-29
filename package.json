@@ -1,6 +1,6 @@
 {
   "name": "alfred-otter",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Alfred workflow for Otter.ai",
   "license": "Apache-2.0",
   "repository": "Stvad/alfred-otter",
@@ -18,11 +18,6 @@
     "preuninstall": "alfy-cleanup",
     "build": "tsc"
   },
-  "files": [
-    "index.js",
-    "icon.png",
-    "info.plist"
-  ],
   "keywords": [
     "alfred",
     "workflow",

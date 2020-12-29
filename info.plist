@@ -115,9 +115,9 @@
 		</array>
 	</dict>
 	<key>createdby</key>
-	<string></string>
+	<string>Vladyslav Sitalo</string>
 	<key>description</key>
-	<string></string>
+	<string>Search and retrieve transcripts for your Otter.ai recordings</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -465,6 +465,6 @@
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>
-	<string></string>
+	<string>https://github.com/Stvad/alfred-otter</string>
 </dict>
 </plist>

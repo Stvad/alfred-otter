@@ -2,7 +2,7 @@
   "name": "alfred-otter",
   "version": "0.1.0",
   "description": "Alfred workflow for Otter.ai",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": "Stvad/alfred-otter",
   "author": {
     "name": "Vladyslav Sitalo",
@@ -30,7 +30,7 @@
   ],
   "dependencies": {
     "alfy": "^0.10.0",
-    "otter.ai-api": "file:../otter.ai-api"
+    "otter.ai-api": "github:Stvad/otter.ai-api"
   },
   "devDependencies": {
     "@types/node": "^14.14.16",

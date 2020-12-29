@@ -24,3 +24,10 @@ export const otterClient = () => __awaiter(void 0, void 0, void 0, function* () 
         password: process.env.password,
     });
 });
+export const isSearchResult = (speech) => speech.speech_otid !== undefined;
+export const getOtid = (speech) => {
+    if (isSearchResult(speech)) {
+        return speech.speech_otid;
+    }
+    return speech.otid;
+};

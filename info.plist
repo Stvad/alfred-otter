@@ -119,7 +119,7 @@
 	<key>description</key>
 	<string>Search and retrieve transcripts for your Otter.ai recordings</string>
 	<key>disabled</key>
-	<false/>
+	<true/>
 	<key>name</key>
 	<string>otter</string>
 	<key>objects</key>
@@ -374,7 +374,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>See more information and instructions at https://github.com/Stvad/alfred-otter</string>
 	<key>uidata</key>
 	<dict>
 		<key>0D1B9ABE-F12D-4F33-AC07-E32484985FCB</key>

@@ -31,6 +31,8 @@
 $ npm install --global alfred-otter
 ```
 
+Or download it from [releases](https://github.com/Stvad/alfred-otter/releases/)
+
 *Requires [Node.js](https://nodejs.org) 12+ and the
 Alfred [Powerpack](https://www.alfredapp.com/powerpack/).*
 

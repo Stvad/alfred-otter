@@ -1,8 +1,8 @@
-import {otterClient, SpeechViewSummary} from "./otter"
-import {Speech} from 'otter.ai-api'
-
 // @ts-ignore
 import * as alfy from 'alfy'
+import { Speech } from 'otter.ai-api'
+import { getExportTemplate, otterClient, SpeechViewSummary } from "./otter"
+
 
 enum Commands {
     FetchSelected = "fetch-selected",
@@ -27,13 +27,9 @@ function getSelectedAndNewer(argument: Argument) {
 const getSpeechIdsToFetch = (command: Commands, argument: Argument) =>
     command === Commands.FetchSince ? getSelectedAndNewer(argument) : [argument.selected.id]
 
-const toOutputItem = (speech: Speech) =>
-    speech.transcripts.map(it => it.transcript)
-        .concat(
-            ` - Recorded at::${new Date(speech.end_time * 1000).toLocaleString()}`,
-            ` - https://otter.ai/u/${speech.otid}`,
-            ` - {{audio: ${speech.audio_url} }}`)
-        .join("\n")
+const toOutputItem = (speech: Speech) => {
+    return eval('`' + getExportTemplate() + '`')
+}
 
 // Todo: Consider adding caching?
 const fetchSpeeches = async (speechIds: Array<string>) => {

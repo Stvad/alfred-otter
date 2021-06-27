@@ -1,8 +1,7 @@
-import {createClient, SearchResult, SpeechSummary} from 'otter.ai-api'
-
-
 // @ts-ignore
 import * as alfy from 'alfy'
+import { createClient, SearchResult, SpeechSummary } from 'otter.ai-api'
+
 
 function validateEnv() {
     if (!process.env.email?.trim() || !process.env.password?.trim()) {
@@ -25,10 +24,24 @@ export interface SpeechViewSummary {
     displayId: string
 }
 
+export function getExportTemplate(): string {
+    var exportTemplateConfigVar = process.env.exportTemplate?.trim()
+    if (!exportTemplateConfigVar) {
+        return [
+            "${speech.transcripts.map(it => it.transcript)}",
+            " - Recorded at::${new Date(speech.end_time * 1000).toLocaleString()}",
+            " - https://otter.ai/u/${speech.otid}",
+            " - {{audio: ${speech.audio_url} }}"
+        ].join("\n")
+    } else {
+        return exportTemplateConfigVar
+    }
+}
+
 export const isSearchResult = (speech: SpeechSummary | SearchResult): speech is SearchResult =>
     (speech as SearchResult).speech_otid !== undefined
 
-export const getOtid =  (speech: SpeechSummary | SearchResult): string => {
+export const getOtid = (speech: SpeechSummary | SearchResult): string => {
     if (isSearchResult(speech)) {
         return speech.speech_otid
     }

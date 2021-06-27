@@ -1,2 +1,5 @@
 node_modules
 .idea
+.log
+info.plist
+dist

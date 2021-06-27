@@ -456,6 +456,8 @@
 		<string></string>
 		<key>searchCacheTimeMs</key>
 		<string>180000</string>
+		<key>exportTemplate</key>
+		<string></string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>

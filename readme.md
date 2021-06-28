@@ -51,7 +51,12 @@ Alfred [Powerpack](https://www.alfredapp.com/powerpack/).*
 2. In Alfred, type `otter` (this will retrieve all recent recordings). 
    You can add a query after the keyword to search for speeches with a transcript matching it. 
 
-3. You can also specify the `exportTemplate` Workflow Environment variable to adjust the way entries get copied into your clipboard.
+3. You can also specify the `exportTemplate` Workflow Environment variable to adjust the way entries get copied into your clipboard. Standard export template designed for copying into RoamResearch is
+
+``` typescript
+${fullTranscript}\n - Recorded at::${new Date(speech.end_time * 1000).toLocaleString()}\n - https://otter.ai/u/${speech.otid}\n - {{audio: ${speech.audio_url} }}
+```
+It references `speech` and `fullTranscript` variables bound within `toOutputItem` function defined in `fetch-text.ts`.
 
 ## License
 

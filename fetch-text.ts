@@ -28,6 +28,7 @@ const getSpeechIdsToFetch = (command: Commands, argument: Argument) =>
     command === Commands.FetchSince ? getSelectedAndNewer(argument) : [argument.selected.id]
 
 const toOutputItem = (speech: Speech) => {
+    let fullTranscript = speech.transcripts.map(it => it.transcript)
     return eval('`' + getExportTemplate() + '`')
 }
 

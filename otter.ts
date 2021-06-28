@@ -25,17 +25,13 @@ export interface SpeechViewSummary {
 }
 
 export function getExportTemplate(): string {
-    var exportTemplateConfigVar = process.env.exportTemplate?.trim()
-    if (!exportTemplateConfigVar) {
-        return [
-            "${speech.transcripts.map(it => it.transcript)}",
-            " - Recorded at::${new Date(speech.end_time * 1000).toLocaleString()}",
-            " - https://otter.ai/u/${speech.otid}",
-            " - {{audio: ${speech.audio_url} }}"
-        ].join("\n")
-    } else {
-        return exportTemplateConfigVar
-    }
+    let exportTemplateConfigVar = process.env.exportTemplate?.trim()
+    return exportTemplateConfigVar || [
+        "${fullTranscript}",
+        " - Recorded at::${new Date(speech.end_time * 1000).toLocaleString()}",
+        " - https://otter.ai/u/${speech.otid}",
+        " - {{audio: ${speech.audio_url} }}"
+    ].join("\n")
 }
 
 export const isSearchResult = (speech: SpeechSummary | SearchResult): speech is SearchResult =>

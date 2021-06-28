@@ -453,7 +453,7 @@
 		<key>email</key>
 		<string></string>
 		<key>exportTemplate</key>
-		<string>${speech.transcripts.map(it =&gt; it.transcript)}\n - Recorded at::${new Date(speech.end_time * 1000).toLocaleString()}\n - https://otter.ai/u/${speech.otid}\n - {{audio: ${speech.audio_url} }}</string>
+		<string>${fullTranscript}\n - Recorded at::${new Date(speech.end_time * 1000).toLocaleString()}\n - https://otter.ai/u/${speech.otid}\n - {{audio: ${speech.audio_url} }}</string>
 		<key>password</key>
 		<string></string>
 		<key>searchCacheTimeMs</key>

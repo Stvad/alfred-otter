@@ -51,6 +51,8 @@ Alfred [Powerpack](https://www.alfredapp.com/powerpack/).*
 2. In Alfred, type `otter` (this will retrieve all recent recordings). 
    You can add a query after the keyword to search for speeches with a transcript matching it. 
 
+3. You can also specify the `exportTemplate` Workflow Environment variable to adjust the way entries get copied into your clipboard.
+
 ## License
 
 Apache 2.0 © [Vladyslav Sitalo](http://sitalo.org)

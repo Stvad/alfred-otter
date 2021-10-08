@@ -454,6 +454,8 @@
 		<string></string>
 		<key>exportTemplate</key>
 		<string>${fullTranscript}\n - Recorded at::${new Date(speech.end_time * 1000).toLocaleString()}\n - https://otter.ai/u/${speech.otid}\n - {{audio: ${speech.audio_url} }}</string>
+		<key>numberOfEntriesToFetch</key>
+		<string>35</string>
 		<key>password</key>
 		<string></string>
 		<key>searchCacheTimeMs</key>

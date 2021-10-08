@@ -8,11 +8,12 @@ import * as alfy from 'alfy'
 // todo way to invalidate cache?
 const cacheTimeMs = parseInt(process.env.searchCacheTimeMs || "180000")
 const summaryKey = "summaryKey"
+const numberOfEntriesToFetch = parseInt(process.env.numberOfEntriesToFetch || "35")
 
 const allSpeeches = async () =>
     await caching.get('allItems', async () => {
         const otterApi = await otterClient()
-        let speeches = await otterApi.getSpeeches()
+        let speeches = await otterApi.getSpeeches({pageSize: numberOfEntriesToFetch})
 
         saveSummary(speeches)
 

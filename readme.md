@@ -58,6 +58,8 @@ ${fullTranscript}\n - Recorded at::${new Date(speech.end_time * 1000).toLocaleSt
 ```
 It references `speech` and `fullTranscript` variables bound within `toOutputItem` function defined in `fetch-text.ts`.
 
+4. The default limit on number of speeches fetched when you are not specifying any search terms is 35. You can change that by changing the value of `numberOfEntriesToFetch` variable in the workflow settings.
+
 ## License
 
 Apache 2.0 © [Vladyslav Sitalo](http://sitalo.org)
